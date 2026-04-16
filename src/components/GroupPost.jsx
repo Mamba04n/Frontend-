@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, MessageCircle, FileText, CheckCircle, Send, ThumbsUp, Trash2 } from 'lucide-react';
+import { Heart, MessageCircle, FileText, CheckCircle, Send, ThumbsUp, Trash2, Download } from 'lucide-react';
 import api from '../api';
 import { toAssetUrl, toDownloadUrl } from '../utils/assetUrl';
 
@@ -125,11 +125,11 @@ export default function GroupPost({ post, user, mutate, feedState }) {
           {canDelete && (
             <button
               onClick={handleDelete}
-              className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+              className="ml-auto h-8 w-8 inline-flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
               title="Eliminar publicacion"
+              aria-label="Eliminar publicación"
             >
-              <Trash2 className="w-3.5 h-3.5" />
-              Eliminar
+              <Trash2 className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -162,9 +162,11 @@ export default function GroupPost({ post, user, mutate, feedState }) {
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="text-xs font-bold text-blue-600 hover:text-blue-800 px-4 py-2 rounded-lg bg-white border border-gray-200 shadow-sm hover:border-blue-300 transition-all shrink-0 ml-3"
+                className="h-9 w-9 inline-flex items-center justify-center text-gray-500 hover:text-blue-700 bg-white border border-gray-200 rounded-full shadow-sm hover:border-blue-300 transition-all shrink-0 ml-3"
+                title="Descargar archivo"
+                aria-label="Descargar archivo"
               >
-                Descargar
+                <Download className="w-4 h-4" />
               </a>
             </div>
           )}

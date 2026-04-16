@@ -5,7 +5,7 @@ const toast = { success: (m) => alert(m), error: (m) => alert(m) };
 import { Users, ShieldAlert, BarChart3, Database, Settings, LogOut, ArrowLeft, BookOpen, GraduationCap, CheckCircle, FileText, Download, Plus, Link as LinkIcon, Copy } from 'lucide-react';
 import { Link, Navigate } from 'react-router-dom';
 import api from '../api';
-import { toAssetUrl } from '../utils/assetUrl';
+import { toDownloadUrl } from '../utils/assetUrl';
 
 export default function AdminDashboard({ user, setToken, setUser }) {
   const [activeTab, setActiveTab] = useState('summary');
@@ -525,8 +525,15 @@ export default function AdminDashboard({ user, setToken, setUser }) {
                                                    {sub.user?.name}
                                                  </td>
                                                  <td className="px-5 py-3">
-                                                    <a href={toAssetUrl(sub.file_path)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded font-bold text-xs transition">
-                                                      <Download className="w-3.5 h-3.5" /> Abrir Documento
+                                                    <a
+                                                      href={toDownloadUrl(sub.file_path)}
+                                                      target="_blank"
+                                                      rel="noreferrer"
+                                                      className="h-8 w-8 inline-flex items-center justify-center text-slate-500 hover:text-blue-700 bg-white border border-slate-200 rounded-full transition"
+                                                      title="Descargar documento"
+                                                      aria-label="Descargar documento"
+                                                    >
+                                                      <Download className="w-4 h-4" />
                                                     </a>
                                                  </td>
                                                  <td className="px-5 py-3">
