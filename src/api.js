@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api', // Usar 127.0.0.1 en vez de localhost para evitar lentitud de DNS en Windows
+    baseURL: import.meta.env.VITE_API_URL || 'https://vocescriticas-api-prod.onrender.com/api',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
