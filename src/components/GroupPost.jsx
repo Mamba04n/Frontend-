@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Heart, MessageCircle, FileText, CheckCircle, Send, ThumbsUp, Trash2 } from 'lucide-react';
 import api from '../api';
-import { toAssetUrl } from '../utils/assetUrl';
+import { toAssetUrl, toDownloadUrl } from '../utils/assetUrl';
 
 export default function GroupPost({ post, user, mutate, feedState }) {
   const [showComments, setShowComments] = useState(false);
@@ -157,7 +157,7 @@ export default function GroupPost({ post, user, mutate, feedState }) {
                 </div>
               </div>
               <a
-                href={toAssetUrl(post.file_path)}
+                href={toDownloadUrl(post.file_path)}
                 download
                 target="_blank"
                 rel="noreferrer"

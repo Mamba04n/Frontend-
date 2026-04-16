@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import api from '../api';
 import { Users, FileText, ChevronLeft, Image as ImageIcon, Send, X, Heart, MessageCircle, FileBadge, CheckCircle, Clock } from 'lucide-react';
 import GroupPost from '../components/GroupPost';
-import { toAssetUrl } from '../utils/assetUrl';
+import { toAssetUrl, toDownloadUrl } from '../utils/assetUrl';
 
 const fetcher = url => api.get(url).then(res => res.data);
 
@@ -372,7 +372,7 @@ function UnitCard({ unit, isTeacher, user, mutateEvals, userTeam }) {
                 </div>
              </div>
              {unit.file_path && (
-                <a href={toAssetUrl(unit.file_path)} target="_blank" rel="noreferrer" className="w-full md:w-auto text-center px-4 py-2 bg-white border border-blue-200 text-blue-700 text-sm font-bold rounded-xl shadow-sm hover:bg-blue-50 transition">
+                <a href={toDownloadUrl(unit.file_path)} target="_blank" rel="noreferrer" className="w-full md:w-auto text-center px-4 py-2 bg-white border border-blue-200 text-blue-700 text-sm font-bold rounded-xl shadow-sm hover:bg-blue-50 transition">
                    Ver Material Adjunto
                 </a>
              )}
@@ -428,7 +428,7 @@ function UnitCard({ unit, isTeacher, user, mutateEvals, userTeam }) {
                                 <img src={sub.user?.avatar_url ? toAssetUrl(sub.user.avatar_url) : `https://ui-avatars.com/api/?name=${sub.user?.name}&background=f3f4f6`} className="w-10 h-10 rounded-full object-cover" alt="av" />
                                 <div>
                                    <p className="text-sm font-bold text-slate-800 leading-none">{sub.user?.name} <span className="text-xs text-blue-600 ml-1">{sub.user?.teams?.length > 0 ? ('' + sub.user.teams[0].name + '') : ''}</span></p>
-                                   <a href={toAssetUrl(sub.file_path)} target="_blank" rel="noreferrer" className="text-xs text-blue-600 font-bold hover:underline mt-1 inline-block">Ver Documento Entregado</a>
+                                   <a href={toDownloadUrl(sub.file_path)} target="_blank" rel="noreferrer" className="text-xs text-blue-600 font-bold hover:underline mt-1 inline-block">Ver Documento Entregado</a>
                                 </div>
                              </div>
                              
