@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { User, Mail, ShieldCheck, Star, Camera, UserPlus, Users, Loader2 } from 'lucide-react';
 import api from '../api';
+import { toAssetUrl } from '../utils/assetUrl';
 
 export default function Profile({ user, setUser }) {
   const { id } = useParams();
@@ -83,7 +84,7 @@ export default function Profile({ user, setUser }) {
          <div className="relative z-10 flex flex-col items-center mt-12">
             <div className="relative group hover:scale-105 transition-transform duration-500">
                 <div className="w-32 h-32 bg-white rounded-full p-2 shadow-xl shrink-0">
-                  <img src={profile.avatar_url ? ('http://localhost:8000/storage/' + profile.avatar_url) : ('https://ui-avatars.com/api/?name=' + profile.name + '&background=eff6ff&color=2563eb&bold=true&size=200')} alt="Avatar" className="w-full h-full object-cover rounded-full border-4 border-slate-50" />
+                  <img src={profile.avatar_url ? toAssetUrl(profile.avatar_url) : ('https://ui-avatars.com/api/?name=' + profile.name + '&background=eff6ff&color=2563eb&bold=true&size=200')} alt="Avatar" className="w-full h-full object-cover rounded-full border-4 border-slate-50" />
                 </div>
                 
                 {isCurrentUser && (

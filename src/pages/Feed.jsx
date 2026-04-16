@@ -3,6 +3,7 @@ import { Heart, MessageCircle, Bookmark, FileText, CheckCircle, Image as ImageIc
 import useSWR from 'swr';
 import api from '../api';
 import GroupPost from '../components/GroupPost';
+import { toAssetUrl } from '../utils/assetUrl';
 
 const fetcher = url => api.get(url).then(res => {
   let payload = res.data?.data?.data || res.data?.data || res.data;
@@ -122,7 +123,7 @@ export default function Feed({ user }) {
         <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
           <div className="flex gap-3 h-full">
             <div className="w-10 h-10 rounded-full border border-gray-200 overflow-hidden shrink-0 mt-0.5">
-              <img src={user?.avatar_url ? ('http://localhost:8000/storage/' + user.avatar_url) : ('https://ui-avatars.com/api/?name=' + (user?.name || '') + '&background=f3f4f6&color=111827')} alt="Avatar" className="w-full h-full object-cover" />
+              <img src={user?.avatar_url ? toAssetUrl(user.avatar_url) : ('https://ui-avatars.com/api/?name=' + (user?.name || '') + '&background=f3f4f6&color=111827')} alt="Avatar" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1">
                <textarea 

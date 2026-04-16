@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import api from '../api';
 import { Users, FileText, ChevronLeft, Image as ImageIcon, Send, X, Heart, MessageCircle, FileBadge, CheckCircle, Clock } from 'lucide-react';
 import GroupPost from '../components/GroupPost';
+import { toAssetUrl } from '../utils/assetUrl';
 
 const fetcher = url => api.get(url).then(res => res.data);
 
@@ -81,7 +82,7 @@ export default function GroupDetail({ user }) {
       if(unitDesc) fd.append('description', unitDesc);
       if(unitFile) fd.append('file', unitFile);
       
-      await api.post(`/groups/${id}`/evaluations, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+      await api.post(`/groups/${id}/evaluations`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
       
       setUnitTitle('');
         setUnitDesc('');
@@ -174,7 +175,7 @@ export default function GroupDetail({ user }) {
           <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm mb-6">
             <div className="flex gap-3 mb-3">
               <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 border border-gray-200 shrink-0">
-                <img src={user?.avatar_url ? `http://localhost:8000/storage/${user.avatar_url}` : `https://ui-avatars.com/api/?name=${user?.name}&background=f3f4f6`} alt="Avatar" className="w-full h-full object-cover" />
+                <img src={user?.avatar_url ? toAssetUrl(user.avatar_url) : `https://ui-avatars.com/api/?name=${user?.name}&background=f3f4f6`} alt="Avatar" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
                 <textarea
@@ -371,7 +372,7 @@ function UnitCard({ unit, isTeacher, user, mutateEvals, userTeam }) {
                 </div>
              </div>
              {unit.file_path && (
-                <a href={`http://localhost:8000/storage/${unit.file_path}`} target="_blank" rel="noreferrer" className="w-full md:w-auto text-center px-4 py-2 bg-white border border-blue-200 text-blue-700 text-sm font-bold rounded-xl shadow-sm hover:bg-blue-50 transition">
+                <a href={toAssetUrl(unit.file_path)} target="_blank" rel="noreferrer" className="w-full md:w-auto text-center px-4 py-2 bg-white border border-blue-200 text-blue-700 text-sm font-bold rounded-xl shadow-sm hover:bg-blue-50 transition">
                    Ver Material Adjunto
                 </a>
              )}
@@ -424,10 +425,10 @@ function UnitCard({ unit, isTeacher, user, mutateEvals, userTeam }) {
                       {unit.submissions.map(sub => (
                          <div key={sub.id} className="bg-white p-4 border border-gray-200 rounded-xl flex flex-col md:flex-row gap-4 items-center justify-between shadow-sm">
                              <div className="flex gap-3 w-full md:w-auto items-center">
-                                <img src={sub.user?.avatar_url ? `http://localhost:8000/storage/${sub.user.avatar_url}` : `https://ui-avatars.com/api/?name=${sub.user?.name}&background=f3f4f6`} className="w-10 h-10 rounded-full object-cover" alt="av" />
+                                <img src={sub.user?.avatar_url ? toAssetUrl(sub.user.avatar_url) : `https://ui-avatars.com/api/?name=${sub.user?.name}&background=f3f4f6`} className="w-10 h-10 rounded-full object-cover" alt="av" />
                                 <div>
                                    <p className="text-sm font-bold text-slate-800 leading-none">{sub.user?.name} <span className="text-xs text-blue-600 ml-1">{sub.user?.teams?.length > 0 ? ('' + sub.user.teams[0].name + '') : ''}</span></p>
-                                   <a href={`http://localhost:8000/storage/${sub.file_path}`} target="_blank" rel="noreferrer" className="text-xs text-blue-600 font-bold hover:underline mt-1 inline-block">Ver Documento Entregado</a>
+                                   <a href={toAssetUrl(sub.file_path)} target="_blank" rel="noreferrer" className="text-xs text-blue-600 font-bold hover:underline mt-1 inline-block">Ver Documento Entregado</a>
                                 </div>
                              </div>
                              

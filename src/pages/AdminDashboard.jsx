@@ -5,6 +5,7 @@ const toast = { success: (m) => alert(m), error: (m) => alert(m) };
 import { Users, ShieldAlert, BarChart3, Database, Settings, LogOut, ArrowLeft, BookOpen, GraduationCap, CheckCircle, FileText, Download, Plus, Link as LinkIcon, Copy } from 'lucide-react';
 import { Link, Navigate } from 'react-router-dom';
 import api from '../api';
+import { toAssetUrl } from '../utils/assetUrl';
 
 export default function AdminDashboard({ user, setToken, setUser }) {
   const [activeTab, setActiveTab] = useState('summary');
@@ -524,7 +525,7 @@ export default function AdminDashboard({ user, setToken, setUser }) {
                                                    {sub.user?.name}
                                                  </td>
                                                  <td className="px-5 py-3">
-                                                    <a href={'http://localhost:8000/storage/' + sub.file_path} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded font-bold text-xs transition">
+                                                    <a href={toAssetUrl(sub.file_path)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded font-bold text-xs transition">
                                                       <Download className="w-3.5 h-3.5" /> Abrir Documento
                                                     </a>
                                                  </td>

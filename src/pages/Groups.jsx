@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Users, Library, ChevronRight, Hash } from 'lucide-react';
 import api from '../api';
+import { toAssetUrl } from '../utils/assetUrl';
 
 export default function Groups({ user }) {
   const [groups, setGroups] = useState([]);
@@ -64,7 +65,7 @@ export default function Groups({ user }) {
             >
                {group.cover_url ? (
                   <div className="h-32 w-full overflow-hidden">
-                     <img src={`http://localhost:8000/storage/${group.cover_url}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Cover" />
+                     <img src={toAssetUrl(group.cover_url)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Cover" />
                   </div>
                ) : (
                   <div className="h-32 w-full bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center relative overflow-hidden">
